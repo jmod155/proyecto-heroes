@@ -9,7 +9,7 @@ import { NavbarComponent } from './compartida/navbar/navbar.component';
 import { EjemploPipesComponent } from './components/ejemplo-pipes/ejemplo-pipes.component';
 registerLocaleData(localEs);
 
-@NgModule({
+@NgModule({   
   //van declarados todos los componentes
   declarations: [
     AppComponent,
