@@ -1,0 +1,85 @@
+
+ <div class="row centrado justifiy-content-center">
+    <h1 class="titulo">Esto es una tabla</h1>
+    <div class="col-md-9">
+    <table class="table table-striped tablaporcentaje">
+        <thead>
+          <tr>
+            <th scope="col">variable</th>
+            <th scope="col">pipe</th>
+            <th scope="col">resultado</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td >{{nombre}}</td>
+            <td>upperCase</td>
+            <td>{{nombre | uppercase}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{nombre}}</td>
+            <td>lowercase</td>
+            <td>{{nombre | lowercase}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{nombre}}</td>
+            <td>slice</td>
+            <td>{{nombre | slice:2}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{pi}}</td>
+            <td>number</td>
+            <td>{{pi | number :"1.2-2"}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{pi}}</td>
+            <td>number</td>
+            <td>{{pi | number :"2.0-3"}}</td>
+            
+          </tr>
+
+          <tr>
+            <td >{{porcentaje}}</td>
+            <td>porcentaje</td>
+            <td>{{porcentaje | percent}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{salario}}</td>
+            <td>currency</td>
+            <td>{{salario | currency}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{salario}}</td>
+            <td>currency EURO</td>
+            <td>{{salario | currency: "EUR"}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{fecha}}</td>
+            <td>date</td>
+            <td>{{fecha | date}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{fecha}}</td>
+            <td>date short</td>
+            <td>{{fecha | date: "short"}}</td>
+            
+          </tr>
+          <tr>
+            <td >{{fecha}}</td>
+            <td>date short</td>
+            <td>{{fecha | date: "yyyy-MM-dd"}}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ </div>
