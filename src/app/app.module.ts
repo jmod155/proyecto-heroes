@@ -11,7 +11,7 @@ registerLocaleData(localEs);
 
 @NgModule({   
   //van declarados todos los componentes
-  declarations: [
+  declarations: [   
     AppComponent,
     NavbarComponent,
     EjemploPipesComponent
