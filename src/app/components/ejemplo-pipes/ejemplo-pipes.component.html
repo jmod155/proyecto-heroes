@@ -1,5 +1,5 @@
 
- <div class="row centrado justifiy-content-center">
+ <div class="row centrado justify-content-center">
     <h1 class="titulo">tabla pipes</h1>
     <div class="col-md-9">
     <table class="table table-striped tablaporcentaje">
@@ -79,6 +79,59 @@
             <td>{{fecha | date: "yyyy-MM-dd"}}</td>
             
           </tr>
+          <tr>
+            <td>{{ nombre }}</td>
+            <td>mi pipe mayuscula</td>
+            <td>{{ nombre | mayuscula }}</td>
+          </tr>
+          <tr>
+            <td>{{ nombre }}</td>
+            <td>capitalizar 1 </td>
+            <td>{{ nombre | capitalizar:1 }}</td>
+          </tr>
+          <tr>
+            <td>{{ nombre }}</td>
+            <td>capitalizar 2 </td>
+            <td>{{ nombre | capitalizar:2 }}</td>
+          </tr>
+          <tr>
+            <td>{{ nombre }}</td>
+            <td>capitalizar 3 </td>
+            <td>{{ nombre | capitalizar:3 }}</td>
+          </tr>
+          <tr>
+            <td>{{ nombre }}</td>
+            <td>capitalizar 4 </td>
+            <td>{{ nombre | capitalizar:4}}</td>
+          </tr>
+          <tr><td>{{ nombre }}</td>
+            <td>boton</td>
+            <td><button class="btn btn-info"(click)="generarAlerta()">Alerta</button>
+            <select class="form-control" (change)="generarAlerta()">
+              <option>Seleccione</option>
+              <option>opt1</option>
+              <option>opt2</option>
+              <option>opt3</option>
+            </select>
+            </td></tr>
+            <tr>
+              <td>{{ nombre }}</td>
+              <td><button [class]="claseBoton"(click)="valorContrasena()">{{nombreBoton}}</button> </td>
+              <td>{{  nombre | capitalizar:3  | cambiarContrasena:verContrasena}} </td>
+            </tr>
+            <tr>
+              <td>{{ valorPromesa }}</td>
+              <td>cpromesas paid async</td>
+              <td>{{ valorPromesa | async}}</td>
+            </tr>
+            <tr>
+              <td>{{ heroe }}</td>
+              <td>mostrar arreglo </td>
+              <td>
+                <pre>
+                {{ heroe |json}}
+             </pre> </td>
+            </tr>
         </tbody>
       </table>
     </div>
