@@ -1,0 +1,55 @@
+<h4>Formulario Reactivos</h4>
+<hr />
+<!-- se enlaza el formulario a la clase [formGroup]="nombre en la clase del grupol fommularioi"-->
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Nombre</label>
+    <input
+      type="text"
+      class="form-control"
+      name="nombre"
+     
+      placeholder="escriba su Nombre"
+     formControlName="nombre"
+     
+    />
+    
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Apellido</label>
+    <input
+      type="text"
+      class="form-control"
+      name="apellido"
+      formControlName="apellido"
+      placeholder="escriba su Apellido"
+     
+     
+    />
+    
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">Correo</label>
+    <input
+      type="email"
+      class="form-control"
+      name="correo"
+      formControlName="correo"
+      placeholder="Escriba su correo"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Contraseña</label>
+    <input
+      type="password"
+      class="form-control"
+      name="contrasena"
+      formControlName="contrasena"
+      placeholder="escriba su contraseña"
+     
+     
+    />
+    
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar</button>
+</form>

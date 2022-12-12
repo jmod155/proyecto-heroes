@@ -1,0 +1,34 @@
+<h4>Formulario ngModel</h4>
+<hr />
+
+<form (ngSubmit)="guardar()">
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Nombre</label>
+    <input
+      type="text"
+      class="form-control"
+      name="nombre"
+      [(ngModel)]="persona.nombre"
+      placeholder="Nombre"
+      minlength="5"
+      required
+      #nombre="ngModel"
+    />
+    <small *ngIf="nombre.invalid && nombre.touched"> Ingrese 5 letras </small>
+    <small *ngIf="nombre.invalid && nombre.touched">
+      Este campo es obligatorio
+    </small>
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">Correo</label>
+    <input
+      type="email"
+      class="form-control"
+      name="correo"
+      [(ngModel)]="persona.correo"
+      placeholder="Escriba su correo"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
+</form>

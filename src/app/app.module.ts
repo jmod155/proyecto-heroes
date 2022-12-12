@@ -1,17 +1,23 @@
 import { registerLocaleData } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import localEs from "@angular/common/locales/es"
+//archivos de rutas
+import { AppRoutingModule } from './app-routing.module';
+//componentes
+import { AppComponent } from './app.component';
 import { NavbarComponent } from './compartida/navbar/navbar.component';
-import { EjemploPipesComponent } from './components/ejemplo-pipes/ejemplo-pipes.component';
+import { LoginComponent } from './components/login/login.component';
+import { FormularioNgmodelComponent } from './components/formularios/formulario-ngmodel/formulario-ngmodel.component';
+import { FormularioReactivosComponent } from './components/formularios/formulario-reactivos/formulario-reactivos.component';
+//pipes
 import { MayusculaPipe } from './components/pipes/pipes/mayuscula.pipe';
+import { EjemploPipesComponent } from './components/ejemplo-pipes/ejemplo-pipes.component';
 import { CapitalizarPipe } from './components/pipes/pipes/capitalizar.pipe';
 import { CambiarContrasenaPipe } from './components/pipes/pipes/cambiar-contrasena.pipe';
-import { LoginComponent } from './components/login/login.component';
-import { RouterModule } from '@angular/router';
+
 registerLocaleData(localEs);
 
 @NgModule({   
@@ -23,13 +29,17 @@ registerLocaleData(localEs);
     MayusculaPipe,
     CapitalizarPipe,
     CambiarContrasenaPipe,
-    LoginComponent
+    LoginComponent,
+    FormularioNgmodelComponent,
+    FormularioReactivosComponent
   ],
   //van todas la librerias que utilicemos
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule//modulo para el manejo de rutas
+    RouterModule,//modulo para el manejo de rutas
+    FormsModule,//para manejo de formularios de angular
+    ReactiveFormsModule//para uso de formularios reactivos de angular
   ],
   //van los servicios - clase que contiene metodos relacionados con el backend
   providers: [
