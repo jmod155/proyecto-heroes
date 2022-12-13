@@ -1,6 +1,6 @@
 <h4>Formulario Reactivos</h4>
 <hr />
-<!-- se enlaza el formulario a la clase [formGroup]="nombre en la clase del grupol fommularioi"-->
+
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
   <div class="mb-3">
     <label for="formGroupExampleInput" class="form-label">Nombre</label>
@@ -8,12 +8,14 @@
       type="text"
       class="form-control"
       name="nombre"
-     
-      placeholder="escriba su Nombre"
-     formControlName="nombre"
-     
+      formControlName="nombre"
+      placeholder="Nombre"
     />
-    
+    <div *ngIf="nombre?.errors != null && nombre?.touched">
+      <small *ngIf="nombre?.errors?.['required']">
+        El nombre es requerido
+      </small>
+    </div>
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput" class="form-label">Apellido</label>
@@ -22,11 +24,16 @@
       class="form-control"
       name="apellido"
       formControlName="apellido"
-      placeholder="escriba su Apellido"
-     
-     
+      placeholder="Apellido"
     />
-    
+    <div *ngIf="apellido?.errors != null && apellido?.touched">
+      <small *ngIf="apellido?.errors?.['required']">
+        El apellido es requerido
+      </small>
+      <small *ngIf="apellido?.errors?.['minlength']">
+        El apellido debe contener minimo 5 letras
+      </small>
+    </div>
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Correo</label>
@@ -38,18 +45,34 @@
       placeholder="Escriba su correo"
     />
   </div>
+
   <div class="mb-3">
-    <label for="formGroupExampleInput" class="form-label">Contraseña</label>
+    <label for="formGroupExampleInput2" class="form-label">Contraseña</label>
     <input
       type="password"
       class="form-control"
       name="contrasena"
       formControlName="contrasena"
-      placeholder="escriba su contraseña"
-     
-     
+      placeholder="Escriba su contraseña"
     />
-    
+    <div *ngIf="contrasena?.errors != null && contrasena?.touched">
+      <small class="text-danger"  *ngIf="contrasena?.errors?.['pesos']">
+        {{ contrasena?.errors?.['pesos'] }}
+      </small>
+      <small class="text-danger" *ngIf="contrasena?.errors?.['number']">
+        {{ contrasena?.errors?.['number'] }}
+      </small>
+    </div>
   </div>
+  <!-- <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid">
+    Guardar
+  </button> -->
   <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
+
+<span>
+  <pre class="text-danger" > Nombre : {{ getError("nombre") | json }}</pre>
+</span>
+<span>
+  <pre class="text-danger" > Contraseña : {{ getError("contrasena") | json }}</pre>
+</span>
