@@ -12,7 +12,7 @@
       placeholder="Nombre"
     />
     <div *ngIf="nombre?.errors != null && nombre?.touched">
-      <small *ngIf="nombre?.errors?.['required']">
+      <small *ngIf="nombre?.errors?.['required'] ">
         El nombre es requerido
       </small>
     </div>
@@ -36,6 +36,16 @@
     </div>
   </div>
   <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">Paises</label>
+    <select class="form-control" formControlName="paises">
+      <option value="-1">Selecione...</option>
+      <option [value]="pais.name" *ngFor="let pais of paises">
+        {{ pais.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Correo</label>
     <input
       type="email"
@@ -56,10 +66,10 @@
       placeholder="Escriba su contraseña"
     />
     <div *ngIf="contrasena?.errors != null && contrasena?.touched">
-      <small class="text-danger"  *ngIf="contrasena?.errors?.['pesos']">
+      <small *ngIf="contrasena?.errors?.['pesos']">
         {{ contrasena?.errors?.['pesos'] }}
       </small>
-      <small class="text-danger" *ngIf="contrasena?.errors?.['number']">
+      <small *ngIf="contrasena?.errors?.['number']">
         {{ contrasena?.errors?.['number'] }}
       </small>
     </div>
@@ -68,11 +78,12 @@
     Guardar
   </button> -->
   <button type="submit" class="btn btn-primary">Guardar</button>
+  
 </form>
 
 <span>
-  <pre class="text-danger" > Nombre : {{ getError("nombre") | json }}</pre>
+  <pre> Nombre : {{ getError("nombre") | json }}</pre>
 </span>
 <span>
-  <pre class="text-danger" > Contraseña : {{ getError("contrasena") | json }}</pre>
+  <pre> Contraseña : {{ getError("contrasena") | json }}</pre>
 </span>

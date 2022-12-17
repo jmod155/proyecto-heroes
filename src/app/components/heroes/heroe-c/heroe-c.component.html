@@ -1,0 +1,79 @@
+
+<div class="container">
+
+  <fieldset class="clasefieldset">
+    <legend class="claselegend">Heroe</legend>
+  <form [formGroup]="frmHeroe" (ngSubmit)="guardar()" class="needs-validation">
+      <div class="form-group ">
+          <label for="Nombre">Nombre</label>
+          <input type="text" 
+           class="form-control" 
+           formControlName="nombre"
+          placeholder="Digite El nombre" required>
+          <small class="error" *ngIf="nombre?.errors?.['required'] && nombre?.touched">
+            El nombre es requerido
+          </small>
+          
+      </div>
+      <div class="form-group">
+        <label for="Poder">Poder</label>
+        <input type="text" 
+         class="form-control" 
+         formControlName="poder"
+        placeholder="Digite Los Poderes" required>
+        <small class="error" *ngIf="poder?.errors?.['required'] && poder?.touched">
+          El poder es requerido
+        </small>
+        
+    </div>
+    <div class="form-group">
+      <label for="Casa">Casa Editorial</label>
+      <select class="form-control " formControlName="casa" required>
+        <option value=-1>Selecione...</option>
+        <option [value]="casa.casa" *ngFor="let casa of casas">
+          {{ casa.casa}}
+        </option>
+      </select>
+      <small class="error" *ngIf="casa?.value==-1 && casa?.touched" >
+        Seleccione una casa Editorial
+      </small>
+  </div>
+  <div class="form-group">
+    <label for="Fupload">Imagen</label>
+    <input
+            formControlName="FuImagen"
+            id="file"
+            type="file"
+            class="form-control"
+            required >
+         
+            <small class="error" *ngIf="FuImagen?.value=='' && FuImagen?.touched" >
+              Seleccione una imagen
+            </small>
+</div>
+      <div class="form-group">
+          <label for="descripcion">Descripcion</label>
+          <textarea class="form-control" 
+          formControlName="descripcion"
+          placeholder="Digite Una Descripcion"
+          rows="3"
+           ></textarea>
+          <span>le quedan {{contartextarea(descripcion)}} caracteres</span>
+          <br>
+          <small class="error" *ngIf="descripcion?.errors?.['required'] && descripcion?.touched">
+            la descripcion es obligatoria
+          </small>
+          <br>
+          <small class="error" *ngIf="descripcion?.errors?.['minlength']">
+            escriba una descripcion de no menos de 15 caracteres
+          </small>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      {{valoresDigitados}}
+  </form>
+</fieldset>
+</div>
+<span>
+ <!--<pre> Nombre : {{ getError("nombre") | json }}</pre>--> 
+</span>

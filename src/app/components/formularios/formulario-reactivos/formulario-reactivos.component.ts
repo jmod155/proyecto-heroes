@@ -1,5 +1,7 @@
 import { Component,OnInit,OnDestroy } from '@angular/core';
 import { FormGroup,FormBuilder,Validators,AbstractControl } from "@angular/forms";
+import { IRestContries } from 'src/app/interfaces/rest-contries.interface';
+import { PaisService } from 'src/app/services/pais.service';
 
 
 @Component({
@@ -10,14 +12,24 @@ import { FormGroup,FormBuilder,Validators,AbstractControl } from "@angular/forms
 export class FormularioReactivosComponent implements OnInit, OnDestroy{
 
   formGroup: FormGroup = new FormGroup({});
-
-  constructor(private formBuilder: FormBuilder){
+  paises: IRestContries[] | null = [];
+  constructor(
+    private formBuilder: FormBuilder,
+    private _servicePais:PaisService
+  ){
     
   }
 
   ngOnInit(): void {
     console.log('Componente init');
     this.buildForm();
+    this.getPaises();
+  }
+
+  getPaises(){
+    this._servicePais.getPaises().subscribe((data:IRestContries[] | null) => {
+      this.paises = data;
+    });
   }
 
   ngOnDestroy(): void {
@@ -29,6 +41,7 @@ export class FormularioReactivosComponent implements OnInit, OnDestroy{
     this.formGroup = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', [Validators.required, Validators.minLength(5)]],
+      paises: [-1, Validators.required],
       correo: ['', Validators.pattern('[a-z0-9]+@[a-z0-9]+\.[a-z]{2,4}$')],
       contrasena: ['', [Validators.required, this.validarContrasena]]
     });

@@ -10,13 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './compartida/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
-import { FormularioNgmodelComponent } from './components/formularios/formulario-ngmodel/formulario-ngmodel.component';
-import { FormularioReactivosComponent } from './components/formularios/formulario-reactivos/formulario-reactivos.component';
 //pipes
 import { MayusculaPipe } from './components/pipes/pipes/mayuscula.pipe';
 import { EjemploPipesComponent } from './components/ejemplo-pipes/ejemplo-pipes.component';
 import { CapitalizarPipe } from './components/pipes/pipes/capitalizar.pipe';
 import { CambiarContrasenaPipe } from './components/pipes/pipes/cambiar-contrasena.pipe';
+
 
 registerLocaleData(localEs);
 
@@ -30,8 +29,8 @@ registerLocaleData(localEs);
     CapitalizarPipe,
     CambiarContrasenaPipe,
     LoginComponent,
-    FormularioNgmodelComponent,
-    FormularioReactivosComponent
+  
+
   ],
   //van todas la librerias que utilicemos
   imports: [
