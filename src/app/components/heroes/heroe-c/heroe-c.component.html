@@ -45,12 +45,15 @@
             id="file"
             type="file"
             class="form-control"
-            required >
-         
+            required (change)="capturarArchivo($event)" >
+           <!--console.log(event.target.files)-->
+           <div  *ngIf="imagenVista">
+           <img [src]="imagenVista" alt="" class="form-control"> 
+          </div>
             <small class="error" *ngIf="FuImagen?.value=='' && FuImagen?.touched" >
               Seleccione una imagen
             </small>
-</div>
+</div >
       <div class="form-group">
           <label for="descripcion">Descripcion</label>
           <textarea class="form-control" 

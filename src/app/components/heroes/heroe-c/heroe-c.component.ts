@@ -5,6 +5,8 @@ import { ICasa } from 'src/app/interfaces/casa.interface';
 import { CasaEditorialService } from '../../../serices/casa-editorial.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ThisReceiver } from '@angular/compiler';
 @Component({
   selector: 'app-heroe-c',
   templateUrl: './heroe-c.component.html',
@@ -16,11 +18,13 @@ export class HeroeCComponent implements OnInit {
    maxCharsTexArea:number = 100;
    valoresDigitados: string="";
    nombreArchivo:string="";
-   archivo:string="";
-  
+   archivos:any=[];
+   imagenVista:string="";
   constructor(
     private formBuilder: FormBuilder,
     private _serviceCasaEditorial:CasaEditorialService 
+    ,private sanitizer:DomSanitizer,
+   
   ){
     
   }
@@ -30,7 +34,7 @@ export class HeroeCComponent implements OnInit {
 ///////////////////////////////////////////////////////
   
   ngOnInit(): void {
-    console.log('Componente init');
+   // console.log('Componente init');
     this.buildForm();
     this.getcasas();
   }
@@ -71,8 +75,10 @@ export class HeroeCComponent implements OnInit {
       this.valoresDigitados+=" Nombre:"+this.nombre?.value;
       this.valoresDigitados+=" - Poder:"+this.poder?.value;
       this.valoresDigitados+=" - Descripcion:"+this.descripcion?.value;
-      this.valoresDigitados+=" - Nombre:"+this.casa?.value;
-      //this.valoresDigitados+="Nombre:"+this.nombre?.value;
+      this.valoresDigitados+=" - Casa Editorial:"+this.casa?.value;
+      this.valoresDigitados+=" - Imagen:"+this.FuImagen?.value;
+     
+ 
     }
      
   }
@@ -109,19 +115,66 @@ export class HeroeCComponent implements OnInit {
    return this.maxCharsTexArea-valor.length;
    }
   
-   getArchivoTipe(tipo:any)
+   getArchivoTipe(tipo:string)
    {
-    const tiposValidos = [ 'png', 'jpg'];
+    const tiposValidos = [ '.png', '.jpg'];
      let valido:boolean=false;
-     if (tiposValidos.includes(tipo ))
+     if (tiposValidos.includes(tipo))
      {
       valido=true;
      }
      return valido;
    }
-
+   capturarArchivo (event:any){
+    debugger;
+    const archivoSubir=event.target.files[0];
+    if (this.getArchivoTipe(archivoSubir))
+    {
+    console.log(event.target.files[0])
+    alert(archivoSubir);
+    this.archivos.push(archivoSubir);
+    console.log(event.target.files);
+     this.extraerBAse64(archivoSubir).then((imagen:any) => {
+      this.imagenVista=imagen.base;
+      alert(imagen.base);
+    }) 
+       }
+       else
+       {alert(event.target.files[0]);
+        event.target.value = null
+        
+       }
+   }
  
-  
+  extraerBAse64=async ($event:any) => new Promise((resolve)=>
+  { 
+  try{
+       const unsafeImg = window.URL.createObjectURL($event);
+       const image =this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+       const reader = new FileReader();
+       reader.readAsDataURL($event);
+       reader.onload=() => {
+        resolve({
+         
+          base: reader.result,
+          
+          
+          
+        })  ;
+       };
+         reader.onerror=error => {
+          resolve({
+            base:null
+          });
+         };
+         return reader   
+    }
+    catch(e){
+      return null;
+    }
+    
+  }) 
+   
 }
 
 
