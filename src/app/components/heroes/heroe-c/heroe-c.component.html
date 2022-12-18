@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" >
 
   <fieldset class="clasefieldset">
     <legend class="claselegend">Heroe</legend>
@@ -38,22 +38,7 @@
         Seleccione una casa Editorial
       </small>
   </div>
-  <div class="form-group">
-    <label for="Fupload">Imagen</label>
-    <input
-            formControlName="FuImagen"
-            id="file"
-            type="file"
-            class="form-control"
-            required (change)="capturarArchivo($event)" >
-           <!--console.log(event.target.files)-->
-           <div  *ngIf="imagenVista">
-           <img [src]="imagenVista" alt="" class="form-control"> 
-          </div>
-            <small class="error" *ngIf="FuImagen?.value=='' && FuImagen?.touched" >
-              Seleccione una imagen
-            </small>
-</div >
+  
       <div class="form-group">
           <label for="descripcion">Descripcion</label>
           <textarea class="form-control" 
@@ -62,15 +47,31 @@
           rows="3"
            ></textarea>
           <span>le quedan {{contartextarea(descripcion)}} caracteres</span>
-          <br>
+          
           <small class="error" *ngIf="descripcion?.errors?.['required'] && descripcion?.touched">
             la descripcion es obligatoria
           </small>
-          <br>
-          <small class="error" *ngIf="descripcion?.errors?.['minlength']">
+        
+          <small class="error mx-auto d-block" *ngIf="descripcion?.errors?.['minlength']">
             escriba una descripcion de no menos de 15 caracteres
           </small>
       </div>
+      <div class="form-group">
+        <label for="Fupload">Imagen</label>
+        <input
+                formControlName="FuImagen"
+                id="file"
+                type="file"
+                class="form-control"
+                required (change)="capturarArchivo($event)" >
+               <!--console.log(event.target.files)-->
+               <div  *ngIf="imagenVista">
+               <img [src]="imagenVista" alt="" class="img-fluid rounded mx-auto d-block"> 
+              </div>
+                <small class="error" *ngIf="FuImagen?.value=='' && FuImagen?.touched" >
+                  Seleccione una imagen
+                </small>
+    </div >
       <br>
       <button type="submit" class="btn btn-primary">Guardar</button>
       {{valoresDigitados}}

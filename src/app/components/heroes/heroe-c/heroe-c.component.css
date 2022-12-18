@@ -35,3 +35,7 @@ legend.claselegend {
 select.ng-invalid {
     background-color:pink;
 }
+
+.img-fluid
+{ max-width: 10%; 
+     height: auto; }

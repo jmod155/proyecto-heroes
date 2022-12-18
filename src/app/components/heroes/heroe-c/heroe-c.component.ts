@@ -117,7 +117,7 @@ export class HeroeCComponent implements OnInit {
   
    getArchivoTipe(tipo:string)
    {
-    const tiposValidos = [ '.png', '.jpg'];
+    const tiposValidos = [ 'image/png', 'image/jpeg'];
      let valido:boolean=false;
      if (tiposValidos.includes(tipo))
      {
@@ -128,10 +128,10 @@ export class HeroeCComponent implements OnInit {
    capturarArchivo (event:any){
     debugger;
     const archivoSubir=event.target.files[0];
-    if (this.getArchivoTipe(archivoSubir))
+    alert(event.target.files[0].type);
+    if (this.getArchivoTipe(event.target.files[0].type))
     {
-    console.log(event.target.files[0])
-    alert(archivoSubir);
+
     this.archivos.push(archivoSubir);
     console.log(event.target.files);
      this.extraerBAse64(archivoSubir).then((imagen:any) => {
@@ -140,9 +140,8 @@ export class HeroeCComponent implements OnInit {
     }) 
        }
        else
-       {alert(event.target.files[0]);
+       {//alert(event.target.files[0]);
         event.target.value = null
-        
        }
    }
  
