@@ -1,80 +1,120 @@
 
-<div class="container" >
+<div class="container">
 
   <fieldset class="clasefieldset">
-    <legend class="claselegend">Heroe</legend>
+    
   <form [formGroup]="frmHeroe" (ngSubmit)="guardar()" class="needs-validation">
-      <div class="form-group ">
-          <label for="Nombre">Nombre</label>
-          <input type="text" 
-           class="form-control" 
-           formControlName="nombre"
-          placeholder="Digite El nombre" required>
-          <small class="error" *ngIf="nombre?.errors?.['required'] && nombre?.touched">
-            El nombre es requerido
-          </small>
-          
-      </div>
-      <div class="form-group">
-        <label for="Poder">Poder</label>
-        <input type="text" 
-         class="form-control" 
-         formControlName="poder"
-        placeholder="Digite Los Poderes" required>
-        <small class="error" *ngIf="poder?.errors?.['required'] && poder?.touched">
-          El poder es requerido
-        </small>
-        
-    </div>
-    <div class="form-group">
-      <label for="Casa">Casa Editorial</label>
-      <select class="form-control " formControlName="casa" required>
-        <option value=-1>Selecione...</option>
-        <option [value]="casa.casa" *ngFor="let casa of casas">
-          {{ casa.casa}}
-        </option>
-      </select>
-      <small class="error" *ngIf="casa?.value==-1 && casa?.touched" >
-        Seleccione una casa Editorial
-      </small>
-  </div>
-  
-      <div class="form-group">
-          <label for="descripcion">Descripcion</label>
-          <textarea class="form-control" 
-          formControlName="descripcion"
-          placeholder="Digite Una Descripcion"
-          rows="3"
-           ></textarea>
-          <span>le quedan {{contartextarea(descripcion)}} caracteres</span>
-          
-          <small class="error" *ngIf="descripcion?.errors?.['required'] && descripcion?.touched">
-            la descripcion es obligatoria
-          </small>
-        
-          <small class="error mx-auto d-block" *ngIf="descripcion?.errors?.['minlength']">
-            escriba una descripcion de no menos de 15 caracteres
-          </small>
-      </div>
-      <div class="form-group">
-        <label for="Fupload">Imagen</label>
-        <input
-                formControlName="FuImagen"
-                id="file"
-                type="file"
-                class="form-control"
-                required (change)="capturarArchivo($event)" >
-               <!--console.log(event.target.files)-->
-               <div  *ngIf="imagenVista">
-               <img [src]="imagenVista" alt="" class="img-fluid rounded mx-auto d-block"> 
-              </div>
-                <small class="error" *ngIf="FuImagen?.value=='' && FuImagen?.touched" >
-                  Seleccione una imagen
+
+    <div class="row g-5">
+      <div  >
+        <h4 class="  justify-content-between align-items-center  ">
+          <span class="text-primary">Heroe</span>
+          <span class="badge bg-primary rounded-pill"> </span>
+        </h4>
+       <ul class="list-group mb-3">
+           <li class="list-group-item   justify-content-between lh-sm">
+            <div>
+              <div class="form-group text-success">
+                <label   for="Nombre">Nombre</label>
+                <input type="text" 
+                 class="form-control" 
+                 formControlName="nombre"
+                placeholder="Digite El nombre" required>
+                <small class="error" *ngIf="nombre?.errors?.['required'] && nombre?.touched">
+                  El nombre es requerido
                 </small>
-    </div >
-      <br>
-      <button type="submit" class="btn btn-primary">Guardar</button>
-      {{valoresDigitados}}
+                
+            </div>
+            </div>
+            
+          </li>
+          <li class="list-group-item  justify-content-between lh-sm bg-light">
+            <div>
+              <div class="form-group text-success">
+                <label   for="Poder">Poder</label>
+                <input type="text" 
+                 class="form-control" 
+                 formControlName="poder"
+                placeholder="Digite Los Poderes" required>
+                <small class="error" *ngIf="poder?.errors?.['required'] && poder?.touched">
+                  El poder es requerido
+                </small>
+                
+            </div>
+            </div>
+            
+          </li>
+          <li class="list-group-item  justify-content-between lh-sm">
+            <div>
+              <div class="form-group text-success">
+                <label   for="Casa">Casa Editorial</label>
+                <select class="form-control " formControlName="casa" required>
+                  <option value=-1>Selecione...</option>
+                  <option [value]="casa.casa" *ngFor="let casa of casas">
+                    {{ casa.casa}}
+                  </option>
+                </select>
+                <small class="error" *ngIf="casa?.value==-1 && casa?.touched" >
+                  Seleccione una casa Editorial
+                </small>
+            </div>
+            </div>
+             
+          </li>
+          <li class="list-group-item   justify-content-between bg-light">
+            <div class="form-group  text-success">
+              <label for="descripcion">Descripcion</label>
+              <textarea class="form-control" 
+              formControlName="descripcion"
+              placeholder="Digite Una Descripcion"
+              rows="3"
+               ></textarea>
+              <span>le quedan {{contartextarea(descripcion)}} caracteres</span>
+              
+              <small class="error" *ngIf="descripcion?.errors?.['required'] && descripcion?.touched">
+                la descripcion es obligatoria
+              </small>
+            
+              <small class="error mx-auto d-block" *ngIf="descripcion?.errors?.['minlength']">
+                escriba una descripcion de no menos de 15 caracteres
+              </small>
+          </div>
+             
+          </li>
+          <li class="list-group-item  justify-content-between  ">
+            <div >
+              <div class="form-group text-success">
+                <label for="Fupload">Imagen</label>
+                <input
+                        formControlName="FuImagen"
+                        id="file"
+                        type="file"
+                        class="form-control"
+                        required (change)="capturarArchivo($event)" >
+                       <!--console.log(event.target.files)-->
+                      
+                        <small class="error" *ngIf="FuImagen?.value=='' && FuImagen?.touched" >
+                          Seleccione una imagen
+                        </small>
+            </div >
+            </div>
+            <span class="text-success"> <div  *ngIf="imagenVista">
+              <img [src]="imagenVista" alt="" class="img-thumbnail img-fluid rounded mx-auto d-block"> 
+             </div></span>
+          </li>
+          
+        </ul>
+
+        <div class="card p-2">
+          <div class="card p-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            {{valoresDigitados}}
+                   </div>
+        </div>
+      </div>
+      
+    </div>
+   
   </form>
 </fieldset>
 </div>
