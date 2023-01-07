@@ -9,6 +9,7 @@ import { HeroesCComponent } from './heroes-c/heroes-c.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
+
 @NgModule({
   declarations: [
     HeroeTarjetaCComponent,

@@ -81,10 +81,20 @@ export class HeroeCComponent implements OnInit {
       }
       this._serviceHeroe.setHeroe(heroe);
       this.heroeGuardado?.push(heroe);
+      this.imagenVista="";
+      this.buildForm();
     }
      
   }
-
+  letraCapital(value:string)
+  {
+  value.toLowerCase()
+                  .trim()
+                  .split(' ')
+                  .map( v => v[0].toUpperCase() + v.substring(1) )
+                  .join(' ');
+                }
+                
   get nombre(): AbstractControl | null { return this.frmHeroe.get('nombre') };
   get descripcion(): AbstractControl | null { return this.frmHeroe.get('descripcion') };
   get poder(): AbstractControl | null { return this.frmHeroe.get('poder') };

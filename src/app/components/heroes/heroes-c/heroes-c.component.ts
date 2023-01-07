@@ -1,5 +1,6 @@
 import { Component ,Input} from '@angular/core';
 import { IHeroe } from '../../../interfaces/heroe.interface';
+import { CapitalizarPipe } from '../../pipes/pipes/capitalizar.pipe';
 @Component({
   selector: 'app-heroes-c',
   templateUrl: './heroes-c.component.html',
