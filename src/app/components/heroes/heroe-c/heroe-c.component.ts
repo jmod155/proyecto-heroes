@@ -1,44 +1,46 @@
 import { Component,OnInit,OnDestroy } from '@angular/core';
 import { FormGroup,ReactiveFormsModule,FormBuilder,Validators,AbstractControl } from "@angular/forms";
 import { ICasa } from 'src/app/interfaces/casa.interface';
-//import { ICasa } from 'src/app/interfaces/casa.interface';
 import { CasaEditorialService } from '../../../serices/casa-editorial.service';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ThisReceiver } from '@angular/compiler';
+import { IHeroe } from '../../../interfaces/heroe.interface';
+import { HeroeService } from '../../../services/heroe/heroe.service';
+ 
 @Component({
   selector: 'app-heroe-c',
   templateUrl: './heroe-c.component.html',
   styleUrls: ['./heroe-c.component.css']
 })
 export class HeroeCComponent implements OnInit {
+  //declaracion de propiedades 
   frmHeroe: FormGroup = new FormGroup({});
    casas :ICasa[] | null=[];
    maxCharsTexArea:number = 100;
    valoresDigitados: string="";
+   errorImagen:string="";
    nombreArchivo:string="";
    archivos:any=[];
    imagenVista:string="";
+   heroeGuardado:IHeroe[]| null=[];
+
   constructor(
     private formBuilder: FormBuilder,
-    private _serviceCasaEditorial:CasaEditorialService 
-    ,private sanitizer:DomSanitizer,
-   
+    private _serviceCasaEditorial:CasaEditorialService ,
+    private sanitizer:DomSanitizer,
+     private _serviceHeroe :HeroeService
   ){
     
   }
-////////////////////////////archivo
-
-
-///////////////////////////////////////////////////////
-  
+ 
+  //evento init
   ngOnInit(): void {
    // console.log('Componente init');
     this.buildForm();
     this.getcasas();
   }
+
   buildForm(){
+    ///se declara el formulario y sus controles 
     this.frmHeroe = this.formBuilder.group({
       nombre: ['', [Validators.required ]],
       descripcion: ['', [Validators.required, Validators.minLength(15)]],
@@ -48,23 +50,15 @@ export class HeroeCComponent implements OnInit {
        
     });
   }
+  //obtener casas editoriales
   getcasas(){
     this._serviceCasaEditorial.getcasasEditorial().map(value=>
      // alert(value.casa)
       this.casas?.push(value) )
   }
+  //evento cuando se da clic sobre el boton del formulario
   guardar(){
    
-       
-    /* this.http.post('http://localhost:8001/upload.php', formData)
-       .subscribe(res => {
-         console.log(res);
-         alert('Uploaded Successfully.');
-       })*/
-  
-    
-
-
      if (this.frmHeroe.status =='INVALID')
      {
       alert ("verifique los errores en el formulario");
@@ -78,7 +72,15 @@ export class HeroeCComponent implements OnInit {
       this.valoresDigitados+=" - Casa Editorial:"+this.casa?.value;
       this.valoresDigitados+=" - Imagen:"+this.FuImagen?.value;
      
- 
+      let heroe:IHeroe = {
+         nombre:this.nombre?.value,
+         poder:this.poder?.value,
+         casaEditorial:this.casa?.value,
+         descripcion:this.descripcion?.value,
+         imagen:this.imagenVista
+      }
+      this._serviceHeroe.setHeroe(heroe);
+      this.heroeGuardado?.push(heroe);
     }
      
   }
@@ -115,21 +117,33 @@ export class HeroeCComponent implements OnInit {
    return this.maxCharsTexArea-valor.length;
    }
   
-   getArchivoTipe(tipo:string)
+   getArchivoTipe(tipo:string,size:number)
    {
     const tiposValidos = [ 'image/png', 'image/jpeg'];
      let valido:boolean=false;
      if (tiposValidos.includes(tipo))
      {
-      valido=true;
+      if (size<=5000000)
+      {
+       
+        valido=true;
+      }
+      else
+      {
+        this.errorImagen ='el tamaño del archivo no puede superar 5 mega'; 
+      }
+     
+     }
+     else{
+      this.errorImagen ='Tipo de archivo no valido';
      }
      return valido;
    }
    capturarArchivo (event:any){
-    debugger;
+    //debugger;
     const archivoSubir=event.target.files[0];
     //alert(event.target.files[0].type);
-    if (this.getArchivoTipe(event.target.files[0].type))
+    if (this.getArchivoTipe(event.target.files[0].type,event.target.files[0].size))
     {
 
     this.archivos.push(archivoSubir);
@@ -140,7 +154,7 @@ export class HeroeCComponent implements OnInit {
     }) 
        }
        else
-       { alert('Tipo de archivo no valido');
+       { 
         event.target.value = null
        }
    }
@@ -156,9 +170,7 @@ export class HeroeCComponent implements OnInit {
         resolve({
          
           base: reader.result,
-          
-          
-          
+
         })  ;
        };
          reader.onerror=error => {

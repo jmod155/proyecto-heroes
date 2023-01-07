@@ -96,28 +96,34 @@
                         <small class="error" *ngIf="FuImagen?.value=='' && FuImagen?.touched" >
                           Seleccione una imagen
                         </small>
+                        <small class="error" *ngIf="errorImagen" >
+                          {{errorImagen}}
+                        </small>
             </div >
             </div>
             <span class="text-success"> <div  *ngIf="imagenVista">
-              <img [src]="imagenVista" alt="" class="img-thumbnail img-fluid rounded mx-auto d-block"> 
+              <img [src]="imagenVista" alt="" class="img-thumbnail img-fluid rounded mx-auto d-block "> 
              </div></span>
           </li>
           
         </ul>
 
-        <div class="card p-2">
-          <div class="card p-2">
+        <div class="card p-2 justify-content-center">
+          <div class="card p-2 d-grid gap-2 d-md-block ">
             <button type="submit" class="btn btn-primary">Guardar</button>
             {{valoresDigitados}}
+            {{heroeGuardado}}
                    </div>
         </div>
       </div>
       
     </div>
-   
+  
   </form>
 </fieldset>
 </div>
 <span>
  <!--<pre> Nombre : {{ getError("nombre") | json }}</pre>--> 
 </span>
+
+<app-heroes-c [heroesLista]="heroeGuardado"></app-heroes-c>
