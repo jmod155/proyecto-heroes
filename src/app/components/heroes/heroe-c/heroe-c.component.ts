@@ -22,7 +22,8 @@ export class HeroeCComponent implements OnInit {
    archivos:any=[];
    imagenVista:string="";
    heroeGuardado:IHeroe[]| null=[];
-
+   
+   
   constructor(
     private formBuilder: FormBuilder,
     private _serviceCasaEditorial:CasaEditorialService ,
@@ -56,9 +57,22 @@ export class HeroeCComponent implements OnInit {
      // alert(value.casa)
       this.casas?.push(value) )
   }
+
+  removerRepetido(nombre?:string)
+  {
+   /* const indexOfObject :any = this.heroeGuardado?.findIndex(object => {
+      return object.nombre === nombre;
+    }); 
+    alert(indexOfObject);
+    if (indexOfObject>-1)
+    {this.heroeGuardado?.splice(indexOfObject);}
+    
+    this.heroeGuardado?.splice(this.heroeGuardado?.findIndex(item => item.nombre === nombre))*/
+  }
   //evento cuando se da clic sobre el boton del formulario
   guardar(){
    
+
      if (this.frmHeroe.status =='INVALID')
      {
       alert ("verifique los errores en el formulario");
@@ -66,44 +80,40 @@ export class HeroeCComponent implements OnInit {
      }
     else
     {
+       this.removerRepetido(this.nombre?.value)
       this.valoresDigitados+=" Nombre:"+this.nombre?.value;
       this.valoresDigitados+=" - Poder:"+this.poder?.value;
       this.valoresDigitados+=" - Descripcion:"+this.descripcion?.value;
       this.valoresDigitados+=" - Casa Editorial:"+this.casa?.value;
       this.valoresDigitados+=" - Imagen:"+this.FuImagen?.value;
      
-      let heroe:IHeroe = {
-         nombre:this.nombre?.value,
-         poder:this.poder?.value,
-         casaEditorial:this.casa?.value,
-         descripcion:this.descripcion?.value,
-         imagen:this.imagenVista
+      let heroe:IHeroe = {nombre:this.nombre?.value,
+                          poder:this.poder?.value,
+                          casaEditorial:this.casa?.value,
+                          descripcion:this.descripcion?.value,
+                          imagen:this.imagenVista
       }
-      this._serviceHeroe.setHeroe(heroe);
+
+     // this._serviceHeroe.setHeroe(heroe);
       this.heroeGuardado?.push(heroe);
       this.imagenVista="";
       this.buildForm();
     }
      
   }
-  letraCapital(value:string)
-  {
-  value.toLowerCase()
-                  .trim()
-                  .split(' ')
-                  .map( v => v[0].toUpperCase() + v.substring(1) )
-                  .join(' ');
-                }
+ 
                 
   get nombre(): AbstractControl | null { return this.frmHeroe.get('nombre') };
   get descripcion(): AbstractControl | null { return this.frmHeroe.get('descripcion') };
   get poder(): AbstractControl | null { return this.frmHeroe.get('poder') };
   get casa(): AbstractControl | null { return this.frmHeroe.get('casa') };
   get FuImagen(): AbstractControl | null { return this.frmHeroe.get('FuImagen') };
+
   getError(controlName: string){
     let error = '';
     const control = this.frmHeroe.get(controlName);
-    if(control?.touched && control?.errors != null ){
+    if(control?.touched && control?.errors != null )
+    {
       error = JSON.stringify(control?.errors)
     }
     return error;
@@ -123,9 +133,9 @@ export class HeroeCComponent implements OnInit {
 
   }*/
   contartextarea(control:any) {
-   let valor:string = control.value;
-   return this.maxCharsTexArea-valor.length;
-   }
+      let valor:string = control.value;
+      return this.maxCharsTexArea-valor.length;
+      }
   
    getArchivoTipe(tipo:string,size:number)
    {
@@ -135,7 +145,6 @@ export class HeroeCComponent implements OnInit {
      {
       if (size<=5000000)
       {
-       
         valido=true;
       }
       else
@@ -145,23 +154,22 @@ export class HeroeCComponent implements OnInit {
      
      }
      else{
-      this.errorImagen ='Tipo de archivo no valido';
-     }
+        this.errorImagen ='Tipo de archivo no valido';
+        }
      return valido;
-   }
+    }
+    //funcion para guardar el archivo 
    capturarArchivo (event:any){
     //debugger;
-    const archivoSubir=event.target.files[0];
+      const archivoSubir=event.target.files[0];
     //alert(event.target.files[0].type);
-    if (this.getArchivoTipe(event.target.files[0].type,event.target.files[0].size))
-    {
-
-    this.archivos.push(archivoSubir);
-    console.log(event.target.files);
-     this.extraerBAse64(archivoSubir).then((imagen:any) => {
-      this.imagenVista=imagen.base;
+     if (this.getArchivoTipe(event.target.files[0].type,event.target.files[0].size))
+     {  this.archivos.push(archivoSubir);
+        console.log(event.target.files);
+        this.extraerBAse64(archivoSubir).then((imagen:any) => {
+        this.imagenVista=imagen.base;
       //alert(imagen.base);
-    }) 
+        }) 
        }
        else
        { 
@@ -178,11 +186,9 @@ export class HeroeCComponent implements OnInit {
        reader.readAsDataURL($event);
        reader.onload=() => {
         resolve({
-         
-          base: reader.result,
-
-        })  ;
-       };
+                  base: reader.result,
+                })  ;
+        };
          reader.onerror=error => {
           resolve({
             base:null
@@ -194,8 +200,20 @@ export class HeroeCComponent implements OnInit {
       return null;
     }
     
-  }) 
-   
+  })
+
+
+  verHeroe($event:IHeroe)
+  {
+     
+    this.frmHeroe.controls['nombre'].setValue($event.nombre);
+    this.frmHeroe.controls['casa'].setValue($event.casaEditorial);
+    this.frmHeroe.controls['descripcion'].setValue($event.descripcion);
+    this.imagenVista=$event.imagen;
+    this.frmHeroe.controls['poder'].setValue($event.poder);
+ 
+
+  }
 }
 
 

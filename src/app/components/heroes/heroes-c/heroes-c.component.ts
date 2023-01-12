@@ -1,4 +1,5 @@
-import { Component ,Input} from '@angular/core';
+
+import { Component ,EventEmitter,Input,Output} from '@angular/core';
 import { IHeroe } from '../../../interfaces/heroe.interface';
 import { CapitalizarPipe } from '../../pipes/pipes/capitalizar.pipe';
 @Component({
@@ -8,10 +9,17 @@ import { CapitalizarPipe } from '../../pipes/pipes/capitalizar.pipe';
 })
 export class HeroesCComponent {
 @Input() heroesLista:IHeroe[] | null=[];
-
+@Output() verHeroePadre:EventEmitter<IHeroe|any> = new EventEmitter();
 getheroesLista()
 {
   return JSON.stringify(this.heroesLista);
 }
 
+verHeroe(heroe:string)
+{  
+  //alert(heroe)
+  let heroeR:IHeroe |any = this.heroesLista?.find(item => item.nombre === heroe)
+  this.verHeroePadre.emit(heroeR);
+   
+}
 }
