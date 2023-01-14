@@ -1,37 +1,78 @@
 
-<div class="divcontenedor">
-   
+ <button  class="btn btn-primary" (click)="verHeroehp()">Editar</button>
+ <span></span>
+ <div class="container">
 
-      <div class="row row-cols-1 row-cols-md-4 g-4"  >
-
-          <div class="col" *ngFor="let heroes of heroesLista">
-            <div class="card"  >
-              <img src="{{ heroes.imagen }}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h3 class="card-title">{{ heroes.nombre }}</h3>
-                <p class="card-text">{{ heroes.descripcion.length <=50?heroes.descripcion:heroes.descripcion.substring(0,50)+'...'}}</p>
+    <fieldset class="clasefieldset">
+      
+       
+      <div class="row g-5">
+        <div  >
+          <h4 class="  justify-content-between align-items-center  ">
+            <span class="text-primary">Heroe</span>
+            <span class="badge bg-primary rounded-pill"> </span>
+          </h4>
+         <ul class="list-group mb-3">
+            <li class="list-group-item   justify-content-between lh-sm">
+                <div style="text-align: center;">
+                    <img src="{{ heroe.imagen }}" style="width: 50%;height: auto;" class="img-responsive img-thumbnail" alt="...">
               </div>
-              
-              <div class="card-body">
-                <h5 class="card-title">Poder</h5>
-                <p class="card-text">{{ heroes.poder}}</p>
+              </li>
+             <li class="list-group-item   justify-content-between lh-sm">
+              <div>
+                <div class="form-group text-success">
+                  <label   for="Nombre">Nombre: </label>
+                  
               </div>
-
-              <div class="card-body">
-                <h5 class="card-title">Casa Editorial</h5>
-                <p class="card-text">{{ heroes.casaEditorial}}</p>
               </div>
-              <div class="card-body">
-                <button  class="btn btn-primary" (click)="verHeroe(heroes.nombre)">Ver</button>
-                
+              <div class="form-group  text-primary">
+                <label  class="label label-primary" for="Nombre">{{heroe.nombre}}</label>
+            </div>
+            </li>
+            <li class="list-group-item  justify-content-between lh-sm bg-light">
+              <div>
+                <div class="form-group text-success">
+                  <label   for="Poder">Poder: </label>
               </div>
-             
+              </div>
+              <div class="form-group  text-primary">
+                <label   class="label label-primary" for="Poder">{{heroe.poder}}</label>
+            </div>
+            </li>
+            <li class="list-group-item  justify-content-between lh-sm">
+              <div>
+                <div class="form-group text-success">
+                  <label  class="label label-primary"  for="Casa">Casa Editorial</label>
+              </div>
+              </div>
+              <div class="form-group  text-primary">
+                <label for="descripcion">{{heroe.casaEditorial}}</label>
+            </div>
+            </li>
+            <li class="list-group-item   justify-content-between bg-light">
+              <div class="form-group  text-success">
+                <label for="descripcion">Descripcion: </label>
             
             </div>
-             
-          </div>
-
+            <div class="form-group  text-primary">
+                <label for="descripcion">{{heroe.descripcion}}</label>
+              
+              
+            </div>
+            </li>
+           
+            
+          </ul>
+  
+          
+        </div>
+        
       </div>
-      
+    
+  
+  </fieldset>
   </div>
- 
+  <span>
+   <!--<pre> Nombre : {{ getError("nombre") | json }}</pre>--> 
+  </span>
+  

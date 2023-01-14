@@ -1,4 +1,4 @@
-import { Injectable, PipeTransform } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IHeroe } from '../../interfaces/heroe.interface';
  
@@ -6,16 +6,24 @@ import { IHeroe } from '../../interfaces/heroe.interface';
   providedIn: 'root'
 })
 export class HeroeService {
-heroe$:Subject<IHeroe>;
+
+  heroe$:Subject<IHeroe[]>; //observable
+  heroes:IHeroe[]=[];
   constructor() { 
-    this.heroe$=new Subject<IHeroe>
+    this.heroe$=new Subject<IHeroe[]>
   }
-  getHeroe$():Observable<IHeroe>{
-   return this.heroe$;
+  
+  getHeroe$():Observable<any>{
+   return this.heroe$.asObservable();
   }
-
-setHeroe(heroe:IHeroe){
-this.heroe$.next(heroe);
-}
-
+  
+  setHeroe(heroe:IHeroe){
+    this.heroes?.push(heroe);
+    this.heroe$.next(this.heroes);
+  }
+  getHeroPorId(Id:string)
+  { 
+    let heroeFiltrado:IHeroe |any = this.heroes?.find(item => item.id === Id)
+    return heroeFiltrado;
+  }
 }

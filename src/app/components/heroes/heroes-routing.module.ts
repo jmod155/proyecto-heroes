@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     children: [
       { 
-        path: 'heroesC',
+        path: 'heroesC/:heroeId',
         component: HeroesCComponent
       },
       { 
@@ -24,7 +24,7 @@ const routes: Routes = [
         component: HeroeTarjetaCComponent
       },
       { 
-        path: 'heroeC/:heroeId',
+        path: 'heroeC',
         component: HeroeCComponent
       }
     ]

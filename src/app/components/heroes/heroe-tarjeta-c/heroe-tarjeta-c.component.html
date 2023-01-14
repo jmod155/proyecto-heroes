@@ -1,1 +1,42 @@
-<p>heroe-tarjeta-c works!</p>
+<div class="divcontenedor">
+   
+
+    <div class="row row-cols-1 row-cols-md-4 g-4"  >
+
+        <div class="col" *ngFor="let heroes of heroesLista">
+          <div class="card"  >
+            <img src="{{ heroes.imagen }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h3 class="card-title">{{ heroes.nombre }}</h3>
+              <p class="card-text">{{ heroes.descripcion.length <=50?heroes.descripcion:heroes.descripcion.substring(0,50)+'...'}}</p>
+            </div>
+            
+            <div class="card-body">
+              <h5 class="card-title">Poder</h5>
+              <p class="card-text">{{ heroes.poder}}</p>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Casa Editorial</h5>
+              <p class="card-text">{{ heroes.casaEditorial}}</p>
+            </div>
+            <div class="card-body">
+              <button  class="btn btn-primary" (click)="verHeroe(heroes.nombre)">Editar</button>
+              
+              <a  (click)="redireccionar(heroes.id)" class="btn btn-primary">Go somewhere</a>
+            </div>
+           
+          
+          </div>
+           
+        </div>
+
+    </div>
+    
+</div>
+
+<a class="btn btn-primary" routerLinkActive="active"  [routerLink]="['heroe/heroesC/1' ]"  >
+  Ver heroe
+  </a>
+
+  

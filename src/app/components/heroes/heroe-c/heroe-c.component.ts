@@ -5,7 +5,8 @@ import { CasaEditorialService } from '../../../serices/casa-editorial.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IHeroe } from '../../../interfaces/heroe.interface';
 import { HeroeService } from '../../../services/heroe/heroe.service';
- 
+import {v4 as uuidv4} from 'uuid'; 
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-heroe-c',
   templateUrl: './heroe-c.component.html',
@@ -22,15 +23,16 @@ export class HeroeCComponent implements OnInit {
    archivos:any=[];
    imagenVista:string="";
    heroeGuardado:IHeroe[]| null=[];
-   
+   //observable para enviar
+   //heroe$:Subject <any>;
    
   constructor(
     private formBuilder: FormBuilder,
     private _serviceCasaEditorial:CasaEditorialService ,
     private sanitizer:DomSanitizer,
-     private _serviceHeroe :HeroeService
+    private _serviceHeroe :HeroeService//se inyecta el servicio
   ){
-    
+    //this.heroe$=new Subject<any>;//se inicializa el 
   }
  
   //evento init
@@ -39,7 +41,7 @@ export class HeroeCComponent implements OnInit {
     this.buildForm();
     this.getcasas();
   }
-
+  
   buildForm(){
     ///se declara el formulario y sus controles 
     this.frmHeroe = this.formBuilder.group({
@@ -80,28 +82,30 @@ export class HeroeCComponent implements OnInit {
      }
     else
     {
-       this.removerRepetido(this.nombre?.value)
+    /*  this.removerRepetido(this.nombre?.value)
       this.valoresDigitados+=" Nombre:"+this.nombre?.value;
       this.valoresDigitados+=" - Poder:"+this.poder?.value;
       this.valoresDigitados+=" - Descripcion:"+this.descripcion?.value;
       this.valoresDigitados+=" - Casa Editorial:"+this.casa?.value;
-      this.valoresDigitados+=" - Imagen:"+this.FuImagen?.value;
+      this.valoresDigitados+=" - Imagen:"+this.FuImagen?.value;*/
+
      
-      let heroe:IHeroe = {nombre:this.nombre?.value,
-                          poder:this.poder?.value,
-                          casaEditorial:this.casa?.value,
-                          descripcion:this.descripcion?.value,
-                          imagen:this.imagenVista
+      let heroe:IHeroe = { id:uuidv4(),//funcion para crear identificador unico
+                           nombre:this.nombre?.value,
+                           poder:this.poder?.value,
+                           casaEditorial:this.casa?.value,
+                           descripcion:this.descripcion?.value,
+                           imagen:this.imagenVista
       }
 
-     // this._serviceHeroe.setHeroe(heroe);
+      this._serviceHeroe.setHeroe(heroe);
       this.heroeGuardado?.push(heroe);
       this.imagenVista="";
       this.buildForm();
     }
      
   }
- 
+   
                 
   get nombre(): AbstractControl | null { return this.frmHeroe.get('nombre') };
   get descripcion(): AbstractControl | null { return this.frmHeroe.get('descripcion') };
