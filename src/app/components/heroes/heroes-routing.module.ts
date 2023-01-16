@@ -4,12 +4,13 @@ import { HeroesCComponent } from './heroes-c/heroes-c.component';
 import { BuscadorCComponent } from './buscador-c/buscador-c.component';
 import { HeroeTarjetaCComponent } from './heroe-tarjeta-c/heroe-tarjeta-c.component';
 import { HeroeCComponent } from './heroe-c/heroe-c.component';
-import { CapitalizarPipe } from '../pipes/pipes/capitalizar.pipe';
+
 
 
 const routes: Routes = [
   {
     path: '',
+    
     children: [
       { 
         path: 'heroesC/:heroeId',
@@ -27,6 +28,7 @@ const routes: Routes = [
         path: 'heroeC',
         component: HeroeCComponent
       }
+      
     ]
   }
 ];

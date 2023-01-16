@@ -1,77 +1,41 @@
 
   
- <span></span>
- <div class="container">
+ 
+ <div class="divcontenedor">
 
     <fieldset class="clasefieldset">
       
-       
-      <div class="row g-5">
-        <div  >
-          <h4 class="  justify-content-between align-items-center  ">
-           
-            <span class="badge bg-primary rounded-pill"> </span>
-          </h4>
-         <ul class="list-group mb-3">
-            <li class="list-group-item   justify-content-between lh-sm">
-                <div style="text-align: center;">
-                    <img src="{{ heroe.imagen }}" style="width: 50%;height: auto;" class="img-responsive img-thumbnail" alt="...">
-              </div>
-              </li>
-             <li class="list-group-item   justify-content-between lh-sm">
-              <div>
-                <div class="form-group text-success">
-                  <label   for="Nombre">Nombre: </label>
-                  
-              </div>
-              </div>
-              <div class="form-group  text-primary">
-                <label  class="label label-primary" for="Nombre">{{heroe.nombre}}</label>
+      <div class="col"  >
+        <div class="card"  >
+          <img src="{{ heroe.imagen  }}" class="card-img-top" alt="...">
+      
+          <div class="card-body">
+            <h3 class="card-title">{{ heroe.nombre  }}</h3>
+            <hr>
+            <p class="card-text">{{ heroe.descripcion}}</p>
+            <hr>
+            <div class="form-group text-success">
+                <label   for="Nombre">Poder</label>
             </div>
-            </li>
-            <li class="list-group-item  justify-content-between lh-sm bg-light">
-              <div>
-                <div class="form-group text-success">
-                  <label   for="Poder">Poder: </label>
-              </div>
-              </div>
-              <div class="form-group  text-primary">
-                <label   class="label label-primary" for="Poder">{{heroe.poder}}</label>
-            </div>
-            </li>
-            <li class="list-group-item  justify-content-between lh-sm">
-              <div>
-                <div class="form-group text-success">
-                  <label  class="label label-primary"  for="Casa">Casa Editorial</label>
-              </div>
-              </div>
-              <div class="form-group  text-primary">
-                <label for="descripcion">{{heroe.casaEditorial}}</label>
-            </div>
-            </li>
-            <li class="list-group-item   justify-content-between bg-light">
-              <div class="form-group  text-success">
-                <label for="descripcion">Descripcion: </label>
+            <p class="card-text">{{ heroe.poder}}</p>
+            <hr>
+            <div class="form-group text-success">
+              <label   for="Nombre">Casa Editorial</label>
+          </div>
+            <p class="card-text"> {{ heroe.casaEditorial}}</p>
+            <hr>
+         
             
-            </div>
-            <div class="form-group  text-primary">
-                <label for="descripcion">{{heroe.descripcion}}</label>
-              
-              
-            </div>
-            </li>
-           
-            
-          </ul>
-  
-          
-        </div>
+    
         
+        </div>
+         
       </div>
     
-  
+    </div>
   </fieldset>
   </div>
+ 
   <span>
    <!--<pre> Nombre : {{ getError("nombre") | json }}</pre>--> 
   </span>

@@ -2,6 +2,8 @@ import { Component ,EventEmitter,Input,Output} from '@angular/core';
 import { IHeroe } from '../../../interfaces/heroe.interface';
 import { Router } from '@angular/router';
 import { HeroeService } from '../../../services/heroe/heroe.service';
+
+
 @Component({
   selector: 'app-heroe-tarjeta-c',
   templateUrl: './heroe-tarjeta-c.component.html',

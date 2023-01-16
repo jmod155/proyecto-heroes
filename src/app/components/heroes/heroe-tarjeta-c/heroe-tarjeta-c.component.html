@@ -5,17 +5,17 @@
 
         <div class="col" *ngFor="let heroes of heroesLista">
           <div class="card"  >
-            <img src="{{ heroes.imagen }}" class="card-img-top" alt="...">
+            <img src="{{ heroes.imagen  }}" class="card-img-top" alt="...">
         
             <div class="card-body">
-              <h3 class="card-title">{{ heroes.nombre }}</h3>
+              <h3 class="card-title">{{ heroes.nombre  }}</h3>
               <hr>
-              <p class="card-text">{{ heroes.descripcion.length <=50?heroes.descripcion:heroes.descripcion.substring(0,50)+'...'}}</p>
+              <p class="card-text">{{ heroes.descripcion.length <=50?heroes.descripcion:heroes.descripcion.substring(0,100)+'...'}}</p>
               <hr>
               <div class="form-group text-success">
                   <label   for="Nombre">Poder</label>
               </div>
-              <p class="card-text">{{ heroes.poder}}</p>
+              <p class="card-text">{{ heroes.poder.length <=50?heroes.poder:heroes.poder.substring(0,50)+'...'}}</p>
               <hr>
               <div class="form-group text-success">
                 <label   for="Nombre">Casa Editorial</label>
