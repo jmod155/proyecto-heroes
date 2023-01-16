@@ -8,18 +8,20 @@ import { HeroeService } from '../../../services/heroe/heroe.service';
   styleUrls: ['./heroe-tarjeta-c.component.css']
 })
 export class HeroeTarjetaCComponent {
-
+  //variables para enviae y recibir informacion entre componentes
   @Input() heroesLista:IHeroe[] | null=[];
   @Output() verHeroePadre:EventEmitter<IHeroe|any> = new EventEmitter();
+  //constructor
   constructor(private ruta: Router,private _serviceHeroe :HeroeService)
   {
 
   }
+  //retorna el listado de heroes formato json //en caso de querer validar la informacion
   getheroesLista()
   {
     return JSON.stringify(this.heroesLista);
   }
-  
+  //cuando se da clic al boton editar se filtra por nombre y se envia al formulario padre la informacion
   verHeroe(heroe:string)
   {  
     //alert(heroe)
@@ -27,6 +29,7 @@ export class HeroeTarjetaCComponent {
     this.verHeroePadre.emit(heroeR);
      
   }
+  //funcion para redireccionar al formulario de heroe
   redireccionar(heroeId?:string)
   {
     //let heroeR:IHeroe |any = this.heroesLista?.find(item => item.id === heroeId)

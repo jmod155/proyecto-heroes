@@ -11,7 +11,9 @@ import { CapitalizarPipe } from '../../pipes/pipes/capitalizar.pipe';
 })
 export class HeroesCComponent {
   //heroe:IHeroe[]|null=[];
+  //variables y propiedades
   heroe:IHeroe=[] as IHeroe| any;
+  //se constructor //
   constructor(private _serviceHeroe:HeroeService,private route: ActivatedRoute)
   {
   /*  _serviceHeroe.getHeroe$().subscribe((data:IHeroe[]| any) => {
@@ -19,7 +21,7 @@ export class HeroesCComponent {
        
     });;*///me suscribo al observable
   }
-
+//ciclo de vida propio de angular
   ngOnInit() {
     
     let heroeId = this.route.snapshot.queryParams["heroeId"];
@@ -33,10 +35,6 @@ export class HeroesCComponent {
     });
    */
     
-    verHeroehp()
-    {
-        
       
-    }
 }
 

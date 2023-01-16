@@ -13,8 +13,8 @@ import { Subject } from 'rxjs';
   styleUrls: ['./heroe-c.component.css']
 })
 export class HeroeCComponent implements OnInit {
-  //declaracion de propiedades 
-  frmHeroe: FormGroup = new FormGroup({});
+  //declaracion de propiedades y variables
+   frmHeroe: FormGroup = new FormGroup({});
    casas :ICasa[] | null=[];
    maxCharsTexArea:number = 100;
    valoresDigitados: string="";
@@ -25,7 +25,7 @@ export class HeroeCComponent implements OnInit {
    heroeGuardado:IHeroe[]| null=[];
    //observable para enviar
    //heroe$:Subject <any>;
-   
+   //constructor
   constructor(
     private formBuilder: FormBuilder,
     private _serviceCasaEditorial:CasaEditorialService ,
@@ -35,16 +35,16 @@ export class HeroeCComponent implements OnInit {
     //this.heroe$=new Subject<any>;//se inicializa el 
   }
  
-  //evento init
+  //evento init ciclo vida de angular
   ngOnInit(): void {
    // console.log('Componente init');
     this.buildForm();
     this.getcasas();
   }
-  
+  //inicializar el formulario
   buildForm(){
     ///se declara el formulario y sus controles 
-    this.frmHeroe = this.formBuilder.group({
+      this.frmHeroe = this.formBuilder.group({
       nombre: ['', [Validators.required ]],
       descripcion: ['', [Validators.required, Validators.minLength(15)]],
       poder: ['', [Validators.required,Validators.minLength(5)]],
@@ -53,7 +53,7 @@ export class HeroeCComponent implements OnInit {
        
     });
   }
-  //obtener casas editoriales
+  //obtener casas editoriales para el combo
   getcasas(){
     this._serviceCasaEditorial.getcasasEditorial().map(value=>
      // alert(value.casa)
@@ -73,8 +73,6 @@ export class HeroeCComponent implements OnInit {
   }
   //evento cuando se da clic sobre el boton del formulario
   guardar(){
-   
-
      if (this.frmHeroe.status =='INVALID')
      {
       alert ("verifique los errores en el formulario");
@@ -87,9 +85,8 @@ export class HeroeCComponent implements OnInit {
       this.valoresDigitados+=" - Poder:"+this.poder?.value;
       this.valoresDigitados+=" - Descripcion:"+this.descripcion?.value;
       this.valoresDigitados+=" - Casa Editorial:"+this.casa?.value;
-      this.valoresDigitados+=" - Imagen:"+this.FuImagen?.value;*/
-
-     
+      this.valoresDigitados+=" - Imagen:"+this.FuImagen?.value;*/  
+     // variable para guardar lo digitado en el formulario
       let heroe:IHeroe = { id:uuidv4(),//funcion para crear identificador unico
                            nombre:this.nombre?.value,
                            poder:this.poder?.value,
@@ -97,22 +94,19 @@ export class HeroeCComponent implements OnInit {
                            descripcion:this.descripcion?.value,
                            imagen:this.imagenVista
       }
-
+    //se envia la informacion del heroe digitado en el servicio 
       this._serviceHeroe.setHeroe(heroe);
+      //se adiciona al arreglo el nuevo heroe digitado
       this.heroeGuardado?.push(heroe);
+      //se quita la imagen del formulario
       this.imagenVista="";
+      //se inicializa el formulario
       this.buildForm();
     }
      
   }
    
-                
-  get nombre(): AbstractControl | null { return this.frmHeroe.get('nombre') };
-  get descripcion(): AbstractControl | null { return this.frmHeroe.get('descripcion') };
-  get poder(): AbstractControl | null { return this.frmHeroe.get('poder') };
-  get casa(): AbstractControl | null { return this.frmHeroe.get('casa') };
-  get FuImagen(): AbstractControl | null { return this.frmHeroe.get('FuImagen') };
-
+//funcion para mostrar los erroes de los controles
   getError(controlName: string){
     let error = '';
     const control = this.frmHeroe.get(controlName);
@@ -136,11 +130,12 @@ export class HeroeCComponent implements OnInit {
      ];
 
   }*/
+  //contador de caracteres digitados en el textarea
   contartextarea(control:any) {
       let valor:string = control.value;
       return this.maxCharsTexArea-valor.length;
       }
-  
+  //validacion del tipo y tamaño del archivo a subir
    getArchivoTipe(tipo:string,size:number)
    {
     const tiposValidos = [ 'image/png', 'image/jpeg'];
@@ -162,7 +157,7 @@ export class HeroeCComponent implements OnInit {
         }
      return valido;
     }
-    //funcion para guardar el archivo 
+    //funcion para guardar el archivo  del uploapfile
    capturarArchivo (event:any){
     //debugger;
       const archivoSubir=event.target.files[0];
@@ -180,7 +175,7 @@ export class HeroeCComponent implements OnInit {
         event.target.value = null
        }
    }
- 
+ //funcion para convetir la imagen en badse 64 y poder mostrarlo en la pagina
   extraerBAse64=async ($event:any) => new Promise((resolve)=>
   { 
   try{
@@ -206,10 +201,10 @@ export class HeroeCComponent implements OnInit {
     
   })
 
-
+//funcion que carga en el formulario cuando se envia desde  heroeTajeta
   verHeroe($event:IHeroe)
   {
-     
+  //se cargan los valores en cada control
     this.frmHeroe.controls['nombre'].setValue($event.nombre);
     this.frmHeroe.controls['casa'].setValue($event.casaEditorial);
     this.frmHeroe.controls['descripcion'].setValue($event.descripcion);
@@ -218,6 +213,12 @@ export class HeroeCComponent implements OnInit {
  
 
   }
+//controladores del formulario
+  get nombre(): AbstractControl | null { return this.frmHeroe.get('nombre') };
+  get descripcion(): AbstractControl | null { return this.frmHeroe.get('descripcion') };
+  get poder(): AbstractControl | null { return this.frmHeroe.get('poder') };
+  get casa(): AbstractControl | null { return this.frmHeroe.get('casa') };
+  get FuImagen(): AbstractControl | null { return this.frmHeroe.get('FuImagen') };
 }
 
 

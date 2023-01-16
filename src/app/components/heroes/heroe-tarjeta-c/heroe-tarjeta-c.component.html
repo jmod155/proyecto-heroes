@@ -6,26 +6,27 @@
         <div class="col" *ngFor="let heroes of heroesLista">
           <div class="card"  >
             <img src="{{ heroes.imagen }}" class="card-img-top" alt="...">
+        
             <div class="card-body">
               <h3 class="card-title">{{ heroes.nombre }}</h3>
+              <hr>
               <p class="card-text">{{ heroes.descripcion.length <=50?heroes.descripcion:heroes.descripcion.substring(0,50)+'...'}}</p>
-            </div>
-            
-            <div class="card-body">
-              <h5 class="card-title">Poder</h5>
+              <hr>
+              <div class="form-group text-success">
+                  <label   for="Nombre">Poder</label>
+              </div>
               <p class="card-text">{{ heroes.poder}}</p>
+              <hr>
+              <div class="form-group text-success">
+                <label   for="Nombre">Casa Editorial</label>
             </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Casa Editorial</h5>
-              <p class="card-text">{{ heroes.casaEditorial}}</p>
-            </div>
-            <div class="card-body">
-              <button  class="btn btn-primary" (click)="verHeroe(heroes.nombre)">Editar</button>
-              
-              <a  (click)="redireccionar(heroes.id)" class="btn btn-primary">Go somewhere</a>
-            </div>
+              <p class="card-text"> {{ heroes.casaEditorial}}</p>
+              <hr>
            
+              <a  (click)="verHeroe(heroes.nombre)" class="btn btn-primary">Editar</a>    
+              <a  (click)="redireccionar(heroes.id)" class="btn btn-primary">Ver Heroe</a>
+              <div class="btn-wrapper text-center d-flex justify-content-between">
+            </div>
           
           </div>
            
@@ -34,9 +35,5 @@
     </div>
     
 </div>
-
-<a class="btn btn-primary" routerLinkActive="active"  [routerLink]="['heroe/heroesC/1' ]"  >
-  Ver heroe
-  </a>
-
+ 
   
